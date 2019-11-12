@@ -9,15 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject public var keyboardController: KeyboardController
+
     var body: some View {
-        Text("Hello World")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack {
+            Text("Key Received: \(keyboardController.shiftModifier ? "⇧" : "")`\(keyboardController.keyPress)")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Text("State: \(keyboardController.state.debugDescription)")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .alert(isPresented: $keyboardController.shouldShowError, content: {
+            Alert(title: Text("Something went wrong"), message: Text(keyboardController.error.debugDescription))
+        })
     }
 }
 
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(KeyboardController())
     }
 }
