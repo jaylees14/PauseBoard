@@ -9,30 +9,28 @@
 import Foundation
 import ORSSerial
 
-class KeyboardController: NSObject, ObservableObject {
+protocol KeyboardControllerDelegate {
+    func didChangeState(to state: KeyboardController.State)
+    func didReceiveKey(key: UInt8, shift: Bool)
+    func didReceiveError(_ error: Error)
+}
+
+class KeyboardController: NSObject {
     public enum State: CustomDebugStringConvertible {
         case connectedToKeyboard(name: String)
-        case notConnected
+        case disconnected
         
         var debugDescription: String {
             switch self {
             case .connectedToKeyboard(let name):
                 return "Connected to keyboard \(name)"
-            case .notConnected:
-                return "Not connected"
+            case .disconnected:
+                return "Disconnected"
             }
         }
     }
     
-    @Published var shiftModifier = false
-    @Published var keyPress: String? 
-    @Published var state = KeyboardController.State.notConnected
-    @Published var shouldShowError = false
-    @Published var error: Error? {
-        didSet {
-            shouldShowError = error != nil
-        }
-    }
+    public var delegate: KeyboardControllerDelegate?
     private var readBytes = [UInt8]()
     private var serialPort: ORSSerialPort?
     
@@ -44,6 +42,7 @@ class KeyboardController: NSObject, ObservableObject {
         serialPort?.baudRate = 9600
     }
     
+    @discardableResult
     func sendData(percentage: UInt8) -> Bool {
         return serialPort?.send(Data(repeating: percentage, count: 1)) ?? false
     }
@@ -51,15 +50,13 @@ class KeyboardController: NSObject, ObservableObject {
 
 extension KeyboardController: ORSSerialPortDelegate {
     func serialPort(_ serialPort: ORSSerialPort, didReceive data: Data) {
-        // First byte: which modifier is pressed - 127 if nothing, 128 if shift
+        // First byte: which modifier is pressed - 128 if nothing, 129 if shift
         // Second byte: which key is pressed - 1 -> 255
         // Third byte: null byte
         for item in data {
             if item == 0 {
                 if readBytes.count >= 2 {
-                    shiftModifier = readBytes[0] == 129
-                    print(readBytes[1])
-                    keyPress = String(data: Data([readBytes[1]]), encoding: .ascii)
+                    delegate?.didReceiveKey(key: readBytes[1], shift: readBytes[0] == 129)
                 }
                 readBytes.removeAll()
             } else {
@@ -69,15 +66,15 @@ extension KeyboardController: ORSSerialPortDelegate {
     }
     
     func serialPortWasOpened(_ serialPort: ORSSerialPort) {
-        self.state = .connectedToKeyboard(name: serialPort.name)
+        self.delegate?.didChangeState(to: .connectedToKeyboard(name: serialPort.name))
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {
-        self.state = .notConnected
+        self.delegate?.didChangeState(to: .disconnected)
     }
        
     func serialPort(_ serialPort: ORSSerialPort, didEncounterError error: Error) {
-        self.error = error
+        self.delegate?.didReceiveError(error)
     }
     
     func serialPortWasRemovedFromSystem(_ serialPort: ORSSerialPort) {

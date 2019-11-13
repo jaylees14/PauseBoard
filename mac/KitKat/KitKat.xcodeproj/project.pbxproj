@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6937A7DD237C4B6500BDD376 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937A7DC237C4B6500BDD376 /* GameTimer.swift */; };
+		6937A7DF237C4BB800BDD376 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6937A7DE237C4BB800BDD376 /* Keyboard.swift */; };
 		694CE78E23731406002EEAAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694CE78D23731406002EEAAC /* AppDelegate.swift */; };
 		694CE79023731406002EEAAC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694CE78F23731406002EEAAC /* ContentView.swift */; };
 		694CE7922373140A002EEAAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 694CE7912373140A002EEAAC /* Assets.xcassets */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6937A7DC237C4B6500BDD376 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
+		6937A7DE237C4BB800BDD376 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		694CE78A23731405002EEAAC /* KitKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KitKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		694CE78D23731406002EEAAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		694CE78F23731406002EEAAC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +44,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6937A7E0237C4BCB00BDD376 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6937A7DC237C4B6500BDD376 /* GameTimer.swift */,
+				6937A7DE237C4BB800BDD376 /* Keyboard.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6937A7E1237C4BD900BDD376 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				694CE78F23731406002EEAAC /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6937A7E2237C4BE800BDD376 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				696CB8EB2375DB4A0090E120 /* KeyboardController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6937A7E3237C4BF300BDD376 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				694CE7912373140A002EEAAC /* Assets.xcassets */,
+				694CE7962373140A002EEAAC /* Main.storyboard */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		694CE78123731405002EEAAC = {
 			isa = PBXGroup;
 			children = (
@@ -59,13 +97,13 @@
 		694CE78C23731405002EEAAC /* KitKat */ = {
 			isa = PBXGroup;
 			children = (
+				6937A7E0237C4BCB00BDD376 /* Model */,
+				6937A7E1237C4BD900BDD376 /* View */,
+				6937A7E2237C4BE800BDD376 /* Controller */,
 				694CE78D23731406002EEAAC /* AppDelegate.swift */,
-				694CE78F23731406002EEAAC /* ContentView.swift */,
-				696CB8EB2375DB4A0090E120 /* KeyboardController.swift */,
-				694CE7912373140A002EEAAC /* Assets.xcassets */,
-				694CE7962373140A002EEAAC /* Main.storyboard */,
-				694CE7992373140A002EEAAC /* Info.plist */,
 				694CE79A2373140A002EEAAC /* KitKat.entitlements */,
+				694CE7992373140A002EEAAC /* Info.plist */,
+				6937A7E3237C4BF300BDD376 /* Misc */,
 				694CE7932373140A002EEAAC /* Preview Content */,
 			);
 			path = KitKat;
@@ -157,6 +195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				694CE79023731406002EEAAC /* ContentView.swift in Sources */,
+				6937A7DD237C4B6500BDD376 /* GameTimer.swift in Sources */,
+				6937A7DF237C4BB800BDD376 /* Keyboard.swift in Sources */,
 				696CB8EC2375DB4A0090E120 /* KeyboardController.swift in Sources */,
 				694CE78E23731406002EEAAC /* AppDelegate.swift in Sources */,
 			);
