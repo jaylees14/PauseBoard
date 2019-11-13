@@ -13,9 +13,10 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     let popover = NSPopover()
+    let keyboardController = KeyboardController()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        popover.contentViewController = NSHostingController(rootView: ContentView().environmentObject(KeyboardController()))
+        popover.contentViewController = NSHostingController(rootView: ContentView().environmentObject(keyboardController))
         
         if let button = statusItem.button {
             button.image = NSImage(named: NSImage.Name("StatusBarIcon"))
@@ -24,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func onStatusBarButtonClick(_ sender: Any?) {
+        keyboardController.sendData(percentage: 10)
         guard let button = statusItem.button else {
             return
         }
@@ -34,4 +36,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 }
-

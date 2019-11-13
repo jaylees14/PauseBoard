@@ -13,7 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Key Received: \(keyboardController.shiftModifier ? "⇧" : "")`\(keyboardController.keyPress)")
+            Text("Key Received: \(keyboardController.shiftModifier ? "⇧" : "")\(keyboardController.keyPress ?? "")")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             Text("State: \(keyboardController.state.debugDescription)")

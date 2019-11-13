@@ -17,7 +17,7 @@ class KeyboardController: NSObject, ObservableObject {
         var debugDescription: String {
             switch self {
             case .connectedToKeyboard(let name):
-                return "Connect to keyboard \(name)"
+                return "Connected to keyboard \(name)"
             case .notConnected:
                 return "Not connected"
             }
@@ -25,7 +25,7 @@ class KeyboardController: NSObject, ObservableObject {
     }
     
     @Published var shiftModifier = false
-    @Published var keyPress: UInt8 = 0
+    @Published var keyPress: String? 
     @Published var state = KeyboardController.State.notConnected
     @Published var shouldShowError = false
     @Published var error: Error? {
@@ -34,16 +34,18 @@ class KeyboardController: NSObject, ObservableObject {
         }
     }
     private var readBytes = [UInt8]()
-    private var serialPort: ORSSerialPort? {
-        didSet {
-            serialPort?.delegate = self
-            serialPort?.open()
-            serialPort?.baudRate = 9600
-        }
-    }
+    private var serialPort: ORSSerialPort?
     
     override init() {
+        super.init()
         serialPort = ORSSerialPortManager.shared().availablePorts.filter { $0.name.contains("usbmodem") }.first
+        serialPort?.delegate = self
+        serialPort?.open()
+        serialPort?.baudRate = 9600
+    }
+    
+    func sendData(percentage: UInt8) -> Bool {
+        return serialPort?.send(Data(repeating: percentage, count: 1)) ?? false
     }
 }
 
@@ -55,8 +57,9 @@ extension KeyboardController: ORSSerialPortDelegate {
         for item in data {
             if item == 0 {
                 if readBytes.count >= 2 {
-                    shiftModifier = readBytes[0] == 128
-                    keyPress = readBytes[1]
+                    shiftModifier = readBytes[0] == 129
+                    print(readBytes[1])
+                    keyPress = String(data: Data([readBytes[1]]), encoding: .ascii)
                 }
                 readBytes.removeAll()
             } else {
