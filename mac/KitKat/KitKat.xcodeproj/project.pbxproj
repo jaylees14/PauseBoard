@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		694CE7922373140A002EEAAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 694CE7912373140A002EEAAC /* Assets.xcassets */; };
 		694CE7952373140A002EEAAC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 694CE7942373140A002EEAAC /* Preview Assets.xcassets */; };
 		694CE7982373140A002EEAAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 694CE7962373140A002EEAAC /* Main.storyboard */; };
+		69569AE72373272600B17616 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 69569AE62373272600B17616 /* ORSSerial */; };
+		696CB8EC2375DB4A0090E120 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696CB8EB2375DB4A0090E120 /* KeyboardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,7 @@
 		694CE7972373140A002EEAAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		694CE7992373140A002EEAAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		694CE79A2373140A002EEAAC /* KitKat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KitKat.entitlements; sourceTree = "<group>"; };
+		696CB8EB2375DB4A0090E120 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69569AE72373272600B17616 /* ORSSerial in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 			children = (
 				694CE78D23731406002EEAAC /* AppDelegate.swift */,
 				694CE78F23731406002EEAAC /* ContentView.swift */,
+				696CB8EB2375DB4A0090E120 /* KeyboardController.swift */,
 				694CE7912373140A002EEAAC /* Assets.xcassets */,
 				694CE7962373140A002EEAAC /* Main.storyboard */,
 				694CE7992373140A002EEAAC /* Info.plist */,
@@ -90,6 +95,9 @@
 			dependencies = (
 			);
 			name = KitKat;
+			packageProductDependencies = (
+				69569AE62373272600B17616 /* ORSSerial */,
+			);
 			productName = KitKat;
 			productReference = 694CE78A23731405002EEAAC /* KitKat.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +126,9 @@
 				Base,
 			);
 			mainGroup = 694CE78123731405002EEAAC;
+			packageReferences = (
+				69569AE52373272600B17616 /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
+			);
 			productRefGroup = 694CE78B23731405002EEAAC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -146,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				694CE79023731406002EEAAC /* ContentView.swift in Sources */,
+				696CB8EC2375DB4A0090E120 /* KeyboardController.swift in Sources */,
 				694CE78E23731406002EEAAC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +357,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		69569AE52373272600B17616 /* XCRemoteSwiftPackageReference "ORSSerialPort" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/armadsen/ORSSerialPort";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		69569AE62373272600B17616 /* ORSSerial */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69569AE52373272600B17616 /* XCRemoteSwiftPackageReference "ORSSerialPort" */;
+			productName = ORSSerial;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 694CE78223731405002EEAAC /* Project object */;
 }
