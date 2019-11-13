@@ -11,7 +11,7 @@ import ORSSerial
 
 protocol KeyboardControllerDelegate {
     func didChangeState(to state: KeyboardController.State)
-    func didReceiveKey(key: UInt8, shift: Bool)
+    func didReceiveKey(data: UInt8, shift: Bool)
     func didReceiveError(_ error: Error)
 }
 
@@ -56,7 +56,7 @@ extension KeyboardController: ORSSerialPortDelegate {
         for item in data {
             if item == 0 {
                 if readBytes.count >= 2 {
-                    delegate?.didReceiveKey(key: readBytes[1], shift: readBytes[0] == 129)
+                    delegate?.didReceiveKey(data: readBytes[1], shift: readBytes[0] == 129)
                 }
                 readBytes.removeAll()
             } else {

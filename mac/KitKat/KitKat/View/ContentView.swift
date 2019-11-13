@@ -37,14 +37,15 @@ struct ContentView: View {
             Text("Key Received: \(keyboard.shiftModifier ? "⇧" : "")\(keyboard.keyPressed ?? "")")
             Text("State: \(keyboard.state.debugDescription)")
         }
+        .padding()
         .alert(isPresented: $keyboard.shouldShowError, content: {
             Alert(title: Text("Something went wrong"), message: Text(keyboard.error.debugDescription))
         })
-        .padding()
         .onReceive(gameTimer.objectWillChange) { (publisher) in
-            if self.gameTimer.currentTimeSeconds < 30 {
+            if self.gameTimer.currentTimeSeconds < 30 && self.gameTimer.isTimerRunning {
                 // Linearly increase
                 let percentage = (30.0 - Double(self.gameTimer.currentTimeSeconds)) / 30.0 * 100.0
+                print(percentage)
                 self.keyboardController.sendData(percentage: UInt8(percentage))
             }
         }
@@ -57,10 +58,13 @@ extension ContentView: KeyboardControllerDelegate {
         self.keyboard.state = state
     }
     
-    func didReceiveKey(key: UInt8, shift: Bool) {
+    func didReceiveKey(data: UInt8, shift: Bool) {
         self.keyboard.shiftModifier = shift
-        self.keyboard.keyPressed = String(data: Data(repeating: key, count: 1), encoding: .ascii)
-        // TODO: Forward key press to OS
+        self.keyboard.keyPressed = String(data: Data(repeating: data, count: 1), encoding: .ascii)
+        // Forward key press to OS
+        if let key = keyMapping[data] {
+            KeyForwarder.pressKey(key)
+        }
     }
     
     func didReceiveError(_ error: Error) {

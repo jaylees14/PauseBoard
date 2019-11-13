@@ -10,7 +10,7 @@ import Foundation
 
 class GameTimer: ObservableObject {
     @Published private(set) var isTimerRunning = false
-    @Published public var currentTimeSeconds = 120
+    @Published public var currentTimeSeconds = 35
     private var timer: Timer?
     
     public func start() {
