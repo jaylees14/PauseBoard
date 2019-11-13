@@ -11,29 +11,28 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var window: NSWindow!
-
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    let popover = NSPopover()
+    let keyboardController = KeyboardController()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
-        // Create the window and set the content view. 
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-            backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
+        popover.contentViewController = NSHostingController(rootView: ContentView().environmentObject(keyboardController))
+        
+        if let button = statusItem.button {
+            button.image = NSImage(named: NSImage.Name("StatusBarIcon"))
+            button.action = #selector(onStatusBarButtonClick(_:))
+        }
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+    
+    @objc func onStatusBarButtonClick(_ sender: Any?) {
+        keyboardController.sendData(percentage: 10)
+        guard let button = statusItem.button else {
+            return
+        }
+        if popover.isShown {
+            popover.performClose(sender)
+        } else {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        }
     }
-
-
 }
-
