@@ -41,18 +41,18 @@ void setup() {
 
 void loop() {
   // change the resistance on this channel from min to max:
-  for (int level = 0; level < 255; level++) {
+  for (int level = 0; level < 255; level += 10) {
     digitalPotWrite(0, level);
     delay(10);
   }
   // wait a second at the top:
-  delay(100);
+  delay(1000);
   // change the resistance on this channel from max to min:
-  for (int level = 0; level < 255; level++) {
+  for (int level = 0; level < 255; level += 10) {
     digitalPotWrite(0, 255 - level);
     delay(10);
   }
-  delay(100);
+  delay(1000);
 }
 
 void digitalPotWrite(int address, int value) {
