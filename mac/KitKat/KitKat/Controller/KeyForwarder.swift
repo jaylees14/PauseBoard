@@ -10,6 +10,7 @@ import Foundation
 
 class KeyForwarder {
     public static func pressKey(_ key: Key) {
+        Logger.instance.log(.keyPress(date: Date(), key: key.name, shift: false))
         executeScript("tell application \"System Events\"\nkey code \(key.rawValue) -- enter\nend")
     }
     

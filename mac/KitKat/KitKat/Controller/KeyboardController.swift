@@ -67,7 +67,6 @@ extension KeyboardController: ORSSerialPortDelegate {
     }
     
     func serialPortWasOpened(_ serialPort: ORSSerialPort) {
-        print("opened")
         self.delegate?.didChangeState(to: .connectedToKeyboard(name: serialPort.name))
     }
     

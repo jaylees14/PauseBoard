@@ -72,7 +72,6 @@ extension ContentView: KeyboardControllerDelegate {
         self.keyboard.keyPressed = String(data: Data(repeating: data, count: 1), encoding: .ascii)
         // Forward key press to OS
         if let key = keyMapping[data] {
-            print(key)
             KeyForwarder.pressKey(key)
         }
     }

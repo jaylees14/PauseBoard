@@ -14,6 +14,15 @@ enum Key: Int, CaseIterable {
     case rightArrow = 124
     case upArrow = 126
     case downArrow = 125
+    
+    var name: String {
+        switch self {
+        case .leftArrow: return "L"
+        case .rightArrow: return "R"
+        case .downArrow: return "D"
+        case .upArrow: return "U"
+        }
+    }
 }
 
 // Byte Received -> Key
