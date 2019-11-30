@@ -4,7 +4,7 @@ char inputPins[KEYS] = {A0, A1, A2, A3};
 char controlPins[KEYS] = {9, 10, 11, 6};
 
 void setResistance(int resistance) {
-  int pwm = 55 + 2 * min(data, 100);
+  int pwm = 155 + 1 * min(resistance, 100);
   for (int i = 0; i < KEYS; i++) {
     analogWrite(controlPins[i], pwm);
   }
@@ -46,7 +46,7 @@ void handleKey(int i) {
     } else {
       lastPressed[i] = millis();
     }
-    // Serial.println(chars[i]);
+    // Serial.write(analogRead(inputPins[i]));
     sendData(i, false);
   } else {
     lastPressed[i] = 0;
