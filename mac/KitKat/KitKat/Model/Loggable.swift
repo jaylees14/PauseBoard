@@ -10,7 +10,7 @@ import Foundation
 
 enum Loggable {
     case keyPress(date: Date, key: String, shift: Bool)
-    case resistanceIncrease(date: Date, level: UInt8)
+    case resistanceChange(date: Date, level: UInt8)
 }
 
 extension Loggable: Encodable {
@@ -34,7 +34,7 @@ extension Loggable: Encodable {
             try container.encode(ISO8601DateFormatter().string(from: date), forKey: .date)
             try container.encode(key, forKey: .keyPressed)
             try container.encode(shift, forKey: .shiftModified)
-        case let .resistanceIncrease(date, level):
+        case let .resistanceChange(date, level):
             try container.encode(ISO8601DateFormatter().string(from: date), forKey: .date)
             try container.encode(level, forKey: .resistanceLevel)
         }

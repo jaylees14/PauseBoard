@@ -10,12 +10,12 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    private static let gameTime = 5.0
+    private static let gameTime = 45.0
     private static let resistanceIncreaseTime = 30.0
     private var keyboardController = KeyboardController()
     @State private var currentUser = 0
     
-    @State var keyboard = Keyboard()
+    @ObservedObject var keyboard = Keyboard()
     @ObservedObject var gameTimer = GameTimer(gameTime: gameTime)
 
     init(){
@@ -35,12 +35,12 @@ struct ContentView: View {
                 Button(action: {
                     self.gameTimer.reset()
                     self.currentUser = self.currentUser + 1
+                    self.keyboardController.sendData(percentage: 0)
                 }, label: {
                     Text("Reset")
                 })
             }
-            Text("Key Received: \(keyboard.shiftModifier ? "⇧" : "")\(keyboard.keyPressed ?? "")")
-            Text("State: \(keyboard.state.debugDescription)")
+            Text("State: \(keyboard.state.debugDescription)").multilineTextAlignment(.center)
         }
         .padding(.all, 30)
         .alert(isPresented: $keyboard.shouldShowError, content: {
@@ -51,11 +51,11 @@ struct ContentView: View {
                 // Linearly increase
                 let percentage = (ContentView.resistanceIncreaseTime - self.gameTimer.currentTimeSeconds) / ContentView.resistanceIncreaseTime * 100.0
                 self.keyboardController.sendData(percentage: UInt8(percentage))
-                Logger.instance.log(.resistanceIncrease(date: Date(), level: UInt8(percentage)))
             }
             
             if self.gameTimer.currentTimeSeconds == 0 && self.gameTimer.isTimerRunning {
                 Logger.instance.exportLogs(to: "\(self.currentUser)-results.json")
+                NotificationManager.sendNotification(title: "Time's up!", message: "Please stop playing!")
             }
         }
     }
@@ -72,6 +72,7 @@ extension ContentView: KeyboardControllerDelegate {
         self.keyboard.keyPressed = String(data: Data(repeating: data, count: 1), encoding: .ascii)
         // Forward key press to OS
         if let key = keyMapping[data] {
+            print(key)
             KeyForwarder.pressKey(key)
         }
     }

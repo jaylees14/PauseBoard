@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Keyboard {
-    var shiftModifier = false
-    var state = KeyboardController.State.disconnected
-    var keyPressed: String?
-    var shouldShowError = false
-    var error: Error? {
+class Keyboard: ObservableObject {
+    @Published var shiftModifier = false
+    @Published var state = KeyboardController.State.disconnected
+    @Published var keyPressed: String?
+    @Published var shouldShowError = false
+    @Published var error: Error? {
         didSet {
             shouldShowError = true
         }

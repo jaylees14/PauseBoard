@@ -16,6 +16,7 @@
 		694CE7982373140A002EEAAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 694CE7962373140A002EEAAC /* Main.storyboard */; };
 		69569AE72373272600B17616 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 69569AE62373272600B17616 /* ORSSerial */; };
 		696CB8EC2375DB4A0090E120 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696CB8EB2375DB4A0090E120 /* KeyboardController.swift */; };
+		69A5535E2391ECBE008E01AE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A5535D2391ECBE008E01AE /* NotificationManager.swift */; };
 		69B47DBC237C83A900348D8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B47DBB237C83A900348D8E /* Logger.swift */; };
 		69B47DBE237C998200348D8E /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B47DBD237C998200348D8E /* Loggable.swift */; };
 		69FA346D237C589A004476EC /* KeyForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA346C237C589A004476EC /* KeyForwarder.swift */; };
@@ -34,6 +35,7 @@
 		694CE7992373140A002EEAAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		694CE79A2373140A002EEAAC /* KitKat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KitKat.entitlements; sourceTree = "<group>"; };
 		696CB8EB2375DB4A0090E120 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
+		69A5535D2391ECBE008E01AE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		69B47DBB237C83A900348D8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		69B47DBD237C998200348D8E /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
 		69FA346C237C589A004476EC /* KeyForwarder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyForwarder.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				69FA346E237C59ED004476EC /* Key.swift */,
 				69B47DBB237C83A900348D8E /* Logger.swift */,
 				69B47DBD237C998200348D8E /* Loggable.swift */,
+				69A5535D2391ECBE008E01AE /* NotificationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			files = (
 				69FA346F237C59ED004476EC /* Key.swift in Sources */,
 				694CE79023731406002EEAAC /* ContentView.swift in Sources */,
+				69A5535E2391ECBE008E01AE /* NotificationManager.swift in Sources */,
 				6937A7DD237C4B6500BDD376 /* GameTimer.swift in Sources */,
 				6937A7DF237C4BB800BDD376 /* Keyboard.swift in Sources */,
 				696CB8EC2375DB4A0090E120 /* KeyboardController.swift in Sources */,

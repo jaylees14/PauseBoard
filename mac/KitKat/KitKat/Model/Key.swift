@@ -10,10 +10,10 @@ import Foundation
 
 // Key -> Mac Key Code
 enum Key: Int, CaseIterable {
-    case leftArrow = 0
-    case rightArrow = 1
-    case upArrow = 2
-    case downArrow = 13
+    case leftArrow = 123
+    case rightArrow = 124
+    case upArrow = 126
+    case downArrow = 125
 }
 
 // Byte Received -> Key

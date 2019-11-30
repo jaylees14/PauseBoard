@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem.button else {
             return
         }
+        
         if popover.isShown {
             popover.performClose(sender)
         } else {

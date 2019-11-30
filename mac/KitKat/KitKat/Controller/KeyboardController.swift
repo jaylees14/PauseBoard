@@ -23,7 +23,7 @@ class KeyboardController: NSObject {
         var debugDescription: String {
             switch self {
             case .connectedToKeyboard(let name):
-                return "Connected to keyboard \(name)"
+                return "Connected to\n\(name)"
             case .disconnected:
                 return "Disconnected"
             }
@@ -44,6 +44,7 @@ class KeyboardController: NSObject {
     
     @discardableResult
     func sendData(percentage: UInt8) -> Bool {
+        Logger.instance.log(.resistanceChange(date: Date(), level: percentage))
         return serialPort?.send(Data(repeating: percentage, count: 1)) ?? false
     }
 }
