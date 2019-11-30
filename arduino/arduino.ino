@@ -1,12 +1,22 @@
 const size_t KEYS = 4;
 
-char pins[KEYS] = {A0, A1, A2, A3};
+char inputPins[KEYS] = {A0, A1, A2, A3};
+char controlPins[KEYS] = {9, 10, 11, 6};
+
+void setResistance(int resistance) {
+  int pwm = 55 + 2 * min(data, 100);
+  for (int i = 0; i < KEYS; i++) {
+    analogWrite(controlPins[i], pwm);
+  }
+}
 
 void setup() {
   Serial.begin(9600);
   for (int i = 0; i < KEYS; i++) {
-    pinMode(pins[i], INPUT);
+    pinMode(inputPins[i], INPUT);
+    pinMode(controlPins[i], OUTPUT);
   }
+  setResistance(0);
 }
 
 bool shift = false;
@@ -19,13 +29,16 @@ long lastPressed[KEYS] = {0};
 
 void loop() {
   delay(100);
-  // int data = receiveData();
+  int data = receiveData();
+  if (data >= 0) {
+    setResistance(data);
+  }
   for (int i = 0; i < KEYS; i++)
     handleKey(i);
 }
 
 void handleKey(int i) {
-  if (analogRead(pins[i]) > threshold) {
+  if (analogRead(inputPins[i]) > threshold) {
     if (lastPressed[i] == 0) {
       lastPressed[i] = millis() + firstRepeatDelay;
     } else if (lastPressed[i] > millis() + repeat) {
