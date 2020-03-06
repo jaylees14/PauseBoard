@@ -5,6 +5,6 @@ Maintaining positive digital well-being has become essential as we spend more an
 
 ### Conferences
 
-This project has been accepted to ![CHI 2020](https://chi2020.acm.org/), and funding to attend has generously been provided by the [University of Bristol Alumni and Friends Foundation](http://www.bristol.ac.uk/alumni/).
+This project has been accepted to [CHI 2020](https://chi2020.acm.org/), and funding to attend has generously been provided by the [University of Bristol Alumni and Friends Foundation](http://www.bristol.ac.uk/alumni/).
 
 <img src="http://www.bristol.ac.uk/media-library/sites/fees-funding/images/alumni-friends-logo.png" alt="Alumni and Friends Logo" width="200">
